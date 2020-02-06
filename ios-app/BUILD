@@ -1,14 +1,11 @@
 load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application")
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 
-objc_library(
+swift_library(
     name = "UrlGetClasses",
-    srcs = [
-         "UrlGet/AppDelegate.m",
-         "UrlGet/UrlGetViewController.m",
-         "UrlGet/main.m",
-    ],
-    hdrs = glob(["UrlGet/*.h"]),
-    data = ["UrlGet/UrlGetViewController.xib"],
+    srcs = glob([
+         "UrlGet/*.swift"
+    ]),
 )
 
 ios_application(
@@ -19,7 +16,7 @@ ios_application(
         "ipad",
     ],
     minimum_os_version = "9.0",
-    infoplists = [":UrlGet/UrlGet-Info.plist"],
+    infoplists = [":UrlGet/Info.plist"],
     visibility = ["//visibility:public"],
     deps = [":UrlGetClasses"],
 )
